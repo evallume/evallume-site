@@ -3,7 +3,7 @@ const VideoOverview = () => (
     {/* Видео на десктопе */}
     <video
       className="hidden md:block absolute inset-0 w-full h-full object-cover rounded-3xl"
-      src="/video/overview-desktop.mp4"
+      src="https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/Video/overview-desktop-xG74pAXyHuhQY71iEjXS60nZKRZsId.mp4"
       autoPlay
       loop
       muted
@@ -13,7 +13,7 @@ const VideoOverview = () => (
     {/* Видео на мобилке */}
     <video
       className="block md:hidden absolute inset-0 w-full h-full object-cover rounded-2xl"
-      src="/video/overview-mobile.mp4"
+      src="https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/Video/overview-mobile-2IB2EcWNxtAlCzEvlXvo1lihgIEihR.mp4"
       autoPlay
       loop
       muted
