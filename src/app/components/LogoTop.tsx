@@ -13,7 +13,7 @@ const LogoTop = () => (
   >
     <Link href="/" scroll={false}>
       <motion.img
-        src="/img/logo.png"
+        src="https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/img/logo-YYXzUEHQNiruEPUfPeOSt2w8qAbXwT.png"
         alt="Evallume Logo"
         className="h-24 object-contain"
         style={{ cursor: "pointer", maxWidth: 120 }}

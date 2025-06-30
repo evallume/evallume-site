@@ -18,23 +18,23 @@ function useIsMobile(maxWidth = 768) {
 const banners = [
   {
     type: "video",
-    src: "/video/hero.mp4",
+    src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/Video/hero-43Im7e7Mm7sAMOBUmai4qwyiptEl88.mp4",
     heading: "FDA Certified Diode Lasers for Hair Removal | USA Professionals",
     text: "Trusted by medspas, beauty clinics, and dermatologists across the USA. Eco-friendly. Premium laser technology since 2019.",
     button: { label: "Explore Equipment", href: "#equipment" }
   },
   {
     type: "image",
-    src: "/img/banner3.png",
-    srcMobile: "/img/banner3-mobile.png",
+    src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/img/banner3-vGefyH64SWr5l1QssN6OQtFwlvimxg.png",
+    srcMobile: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/img/banner3-mobile-fpd7dL9vqjX1JHAuDVKT28C29GskZ5.PNG",
     heading: "Best-Selling Diode Lasers for Clinics and Beauty Studios",
     text: "Chosen by professionals worldwide. Reliable. Pain-Free. Certified.",
     button: { label: "View Top Models", href: "#equipment" }
   },
   {
     type: "image",
-    src: "/img/banner2.jpg",
-    srcMobile: "/img/banner2-mobile.png",
+    src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/img/banner2-R1F144Q4BNlSnDFHN8wcT09xs7qPkw.jpg",
+    srcMobile: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/img/banner2-mobile-vxNjBBFDfEgBcpENwY4KLcocmKobnv.png",
     heading: "More Than Equipment — Full Business Support for You",
     text: "From consultation to training and marketing — we help your clinic grow with the right technology.",
     button: { label: "Get a Free Consultation", href: "#contact" }

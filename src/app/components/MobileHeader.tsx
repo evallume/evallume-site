@@ -55,7 +55,7 @@ export default function MobileHeader() {
         {/* Абсолютный центр — логотип */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center z-0">
           <Image
-  src="/img/logo.png"
+  src="https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/img/logo-YYXzUEHQNiruEPUfPeOSt2w8qAbXwT.png"
   alt="Evallume Logo"
   width={90}     // или твоя фактическая ширина
   height={32}    // или твоя фактическая высота
@@ -105,7 +105,7 @@ export default function MobileHeader() {
             <div className="flex items-center justify-between px-5 pt-5 pb-2">
               {/* Логотип — заменить путь/размер под себя */}
               <Image
-  src="/img/logo.png"
+  src="https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/img/logo-YYXzUEHQNiruEPUfPeOSt2w8qAbXwT.png"
   alt="Evallume Logo"
   width={64}
   height={24}

@@ -61,11 +61,10 @@ export default function AboutBlock() {
       <div className="max-w-5xl mx-auto relative z-20 px-4 py-20 md:py-28 flex flex-col items-center bg-white/90 rounded-2xl md:shadow-2xl">
         {/* Блок фото+текста */}
         <div className="flex flex-col md:flex-row items-center gap-12 w-full">
-          {/* Фирменное фото — замени путь! */}
           <div className="flex-shrink-0 mb-8 md:mb-0">
             <div className="relative w-44 h-44 md:w-60 md:h-60">
               <Image
-                src="/team/evallume-founder.jpg" // Поменяй на свое фото или оборудование!
+                src="https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/team/evallume-founder-je4YQ8pPrG1fatgBbfiBZFPWcz721c.jpg" // Поменяй на свое фото или оборудование!
                 alt="Evallume Founder — Aesthetic Equipment Expert"
                 fill
                 className="object-cover rounded-3xl shadow-2xl border-8 border-white"

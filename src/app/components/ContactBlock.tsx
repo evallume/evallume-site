@@ -48,7 +48,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       {/* Фоновое изображение с overlay */}
       <div className="absolute inset-0 w-full h-full hidden md:block">
         <Image
-  src="/img/apparatus-bg.jpg"
+  src="https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/img/apparatus-bg-vOdQgvSwZMdDIMXWMeLVHxyJ0UyoFf.jpg"
   alt="Evallume Device"
   width={1920}         // <-- поставь реальные размеры твоего файла
   height={1080}

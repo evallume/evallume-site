@@ -31,7 +31,7 @@ interface FormState {
 const slides = [
   {
     title: "PS10",
-    image: "/equipment/PS10.png",
+    image: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/equipment/PS10-cAlMus61lE8A56CwAuxzAfQWoudNts.png",
     description: (
       <>
         <b>SuperPico PS10 — Advanced Picosecond Laser for Pigment Removal & Skin Rejuvenation</b>
@@ -51,7 +51,7 @@ const slides = [
   },
   {
     title: "PicoFocus",
-    image: "/equipment/picofocus.png",
+    image: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/equipment/picofocus-hpKdCGaAhBZK9GiWWwOQS6BniyE4ub.png",
     description: (
       <>
         <b>Picofocus 450ps Picosecond Laser — Ultimate Multi-Mode Pigment & Tattoo Removal</b>

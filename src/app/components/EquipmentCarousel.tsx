@@ -31,7 +31,7 @@ interface FormState {
 const slides = [
   {
     title: "Esthetician",
-    image: "/equipment/Esthetician.png",
+    image: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/equipment/Esthetician-OrCNWOeStCKcRgEzw0Rnw4VgMgndHg.PNG",
     description: (
       <>
         <b>Fast, painless hair removal for all skin types with triple wavelength technology</b>
@@ -50,7 +50,7 @@ const slides = [
   },
   {
     title: "FG2000-D",
-    image: "/equipment/FG2000-D.png",
+    image: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/equipment/FG2000-D-G6wqQkIfdJb6K8JZkq4ntmfW24Wxgz.png",
     description: (
       <>
         <b>FG2000D Diode Laser — Permanent Hair Removal System</b>
@@ -69,7 +69,7 @@ const slides = [
   },
   {
     title: "Ice Cube",
-    image: "/equipment/Ice Cube.png",
+    image: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/equipment/Ice%20Cube-mMmvq582dUNxKv3MwphwEupLcNKYzy.png",
     description: (
       <>
         <b>ICE CUBE Diode Laser — Triple Wavelength Painless Hair Removal</b>
@@ -91,7 +91,7 @@ const slides = [
   },
   {
     title: "Ice Discovery",
-    image: "/equipment/Ice Discovery.png",
+    image: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/equipment/Ice%20Discovery-VNDYE4FH2IY11b7hYZqEXQenuJDBss.png",
     description: (
       <>
         <b>Next-Gen Diode Laser — Adjustable Spot, Maximum Comfort, Fast ROI</b>
@@ -112,7 +112,7 @@ const slides = [
   },
   {
     title: "Zun Laser",
-    image: "/equipment/Zun Laser.png",
+    image: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/equipment/Zun%20Laser-wKXZGdlBQqjalQYviEKdS17D8JGqja.png",
     description: (
       <>
         <b>Quattro 3-Wave Diode Laser — Smart Hair Removal with Maximum Coverage</b>

@@ -5,19 +5,19 @@ const stories = [
   {
     name: "Lindsey M.",
     city: "Los Angeles, CA",
-    photo: "/clients/5.jpg",
+    photo: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/clients/5-yZZB5XJMhQC6lKWy4CrHJxIOqK2mWv.jpg",
     text: "We’ve been using Evallume’s diode laser Esthetician for over 6 months — it's a game changer. Safe for all skin types, super easy to operate, and our clients love the results!",
   },
   {
     name: "Dr. Jose Perez",
     city: "Miami, FL",
-    photo: "/clients/7.jpg",
+    photo: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/clients/7-Md0Zg5YmlH0dFOBbPb5YaRhQVdMi1b.JPG",
     text: "Evallume checked all the boxes: FDA clearance, excellent remote support, and real clinical results. Treatments are quick, comfortable, and patients keep coming back.",
   },
   {
     name: "Emil Chen",
     city: "New York, NY",
-    photo: "/clients/8.jpg",
+    photo: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/clients/8-l6cX5DGVmkAFA1H4cdCcTyBs55dOKZ.JPG",
     text: "Setup was fast, the training is top-notch, and tech support actually picks up the phone. I recommend Evallume to colleagues — finally a brand that delivers.",
   },
   // Ещё истории...

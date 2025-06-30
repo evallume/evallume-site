@@ -1,7 +1,14 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['klfmasfbi2f0kmeu.public.blob.vercel-storage.com'], // укажи свой домен точно
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'klfmasfbi2f0kmeu.public.blob.vercel-storage.com',
+        // pathname: '/**', // можно указать если надо ограничить по папкам
+      },
+    ],
   },
 };
 

@@ -5,14 +5,14 @@ import Image from "next/image";
 
 // Массив сертификатов (пути к картинкам и подписи)
 const certificates = [
-  { src: "/certificates/fda-6.jpg", alt: "FDA approved" },
-  { src: "/certificates/fda-5.jpg", alt: "FDA letter" },
-  { src: "/certificates/ce-1.jpg", alt: "CE ENC" },
-  { src: "/certificates/fda-1.jpg", alt: "FDA letter" },
-  { src: "/certificates/iso-1.jpg", alt: "ISO 13284" },
-  { src: "/certificates/fda-2.jpg", alt: "FDA letter" },
-  { src: "/certificates/fda-3.jpg", alt: "FDA letter" },
-  { src: "/certificates/fda-4.jpg", alt: "FDA letter" },
+  { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/fda-6-1qiWBH5mRZF7sQWFhU8aexMKDquCSf.jpg", alt: "FDA approved" },
+  { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/fda-5-WZFB7hAJLCsrElMesAmBoZTANmksaZ.jpg", alt: "FDA letter" },
+  { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/ce-1-VPr0VOXf0HDCeOW81QqhEosEiTkJ5p.jpg", alt: "CE ENC" },
+  { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/fda-1-2hPJ9RUHagLMCTO1II3zOij3Kb41Go.jpg", alt: "FDA letter" },
+  { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/iso-1-iYdB0CUDaAYlivW7bDPBeDxw9QcHHs.jpg", alt: "ISO 13284" },
+  { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/fda-2-9yCLFHxpCbjdqOgN0NNYoubZkFlwCr.jpg", alt: "FDA letter" },
+  { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/fda-3-c0yRq3pIrZTDS1bPlcXgqqvOzIjnwI.jpg", alt: "FDA letter" },
+  { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/fda-4-ViuKJpqWTnyfSACyCcSnv597S0AcEo.jpg", alt: "FDA letter" },
 ];
 
 export default function CertificatesCarousel() {
