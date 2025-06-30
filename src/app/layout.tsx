@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
 
 // --- SEO и OpenGraph мета-данные через generateMetadata ---
 
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen bg-gradient-to-br from-[#e6dad1] via-[#bfcbd8] to-[#e6dad1] text-black">
         {children}
+        <Analytics />
       </body>
     </html>
   );
