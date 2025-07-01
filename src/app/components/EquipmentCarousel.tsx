@@ -245,9 +245,9 @@ export default function EquipmentBlock() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const slidesCount = slides.length;
 
-const swipeThreshold = 40;    // минимальная длина свайпа
-const angleTolerance = 1;   // максимально допустимый вертикальный угол
-const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const swipeThreshold = 40;    // минимальная длина свайпа
+  const angleTolerance = 1;   // максимально допустимый вертикальный угол
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   
 
