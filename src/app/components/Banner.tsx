@@ -46,8 +46,13 @@ export default function BannerSlider() {
   const [current, setCurrent] = useState(0);
   const count = banners.length;
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const touchStartX = useRef<number | null>(null);
 
+// Настройка чувствительности свайпа
+const swipeThreshold = 40;    // минимальная длина свайпа
+const angleTolerance = 1;   // максимальный вертикальный угол (чем меньше — тем строже)
+const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  
   // Сброс и запуск автосмены (11 сек) — всегда с нуля!
   const resetInterval = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -80,15 +85,25 @@ export default function BannerSlider() {
 
   // Swipe/touch
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
+  touchStart.current = {
+    x: e.touches[0].clientX,
+    y: e.touches[0].clientY,
   };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const diff = e.changedTouches[0].clientX - touchStartX.current;
-    if (diff > 50) prev();
-    if (diff < -50) next();
-    touchStartX.current = null;
-  };
+};
+
+const handleTouchEnd = (e: React.TouchEvent) => {
+  if (!touchStart.current) return;
+
+  const deltaX = e.changedTouches[0].clientX - touchStart.current.x;
+  const deltaY = e.changedTouches[0].clientY - touchStart.current.y;
+
+  if (Math.abs(deltaX) > swipeThreshold && Math.abs(deltaY) / Math.abs(deltaX) < angleTolerance) {
+    if (deltaX > 0) prev();
+    else next();
+  }
+
+  touchStart.current = null;
+};
 
   const isMobile = useIsMobile(768);
   const banner = banners[current];

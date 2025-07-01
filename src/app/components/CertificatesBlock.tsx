@@ -1,9 +1,8 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-// Массив сертификатов (пути к картинкам и подписи)
 const certificates = [
   { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/fda-6-1qiWBH5mRZF7sQWFhU8aexMKDquCSf.jpg", alt: "FDA approved" },
   { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/fda-5-WZFB7hAJLCsrElMesAmBoZTANmksaZ.jpg", alt: "FDA letter" },
@@ -15,95 +14,135 @@ const certificates = [
   { src: "https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/certificates/fda-4-ViuKJpqWTnyfSACyCcSnv597S0AcEo.jpg", alt: "FDA letter" },
 ];
 
+const visibleCount = 3;
+
 export default function CertificatesCarousel() {
   const [center, setCenter] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [opened, setOpened] = useState<number | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const visibleCount = 3; // 3 по центру (можно 5 если много сертификатов)
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
-  // Автоматическое вращение
-  useEffect(() => {
+  const swipeThreshold = 40; 
+  const angleTolerance = 1;
+
+  const resetAutoplay = useCallback(() => {
+  if (intervalRef.current) clearInterval(intervalRef.current);
+  if (!paused) {
     intervalRef.current = setInterval(() => {
-      setCenter((prev) => (prev + 1) % certificates.length);
-    }, 4000);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, []); // ← фикс
-
-  // Получаем индексы для показа "сзади"
-  function getVisibleCertificates(centerIdx: number) {
-    const n = certificates.length;
-    const result = [];
-    for (let i = -Math.floor(visibleCount / 2); i <= Math.floor(visibleCount / 2); i++) {
-      result.push((centerIdx + i + n) % n);
-    }
-    return result;
+      setCenter(prev => (prev + 1) % certificates.length);
+    }, 5000);
   }
+}, [paused]);
+
+  useEffect(() => {
+  resetAutoplay();
+  return () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  };
+}, [center, paused, resetAutoplay]);
+
+  const getVisibleCertificates = (centerIdx: number) => {
+    const n = certificates.length;
+    return Array.from({ length: visibleCount }, (_, i) => (centerIdx + i - 1 + n) % n);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStart.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart.current) return;
+    const deltaX = e.changedTouches[0].clientX - touchStart.current.x;
+    const deltaY = e.changedTouches[0].clientY - touchStart.current.y;
+
+    if (Math.abs(deltaX) > swipeThreshold && Math.abs(deltaY) / Math.abs(deltaX) < angleTolerance) {
+      setCenter(prev => (prev + (deltaX > 0 ? -1 : 1) + certificates.length) % certificates.length);
+      resetAutoplay();
+    }
+    touchStart.current = null;
+  };
+
+  const handleGoTo = (idx: number) => {
+    setCenter(idx);
+    resetAutoplay();
+  };
+
+  const openModal = (idx: number) => {
+    setPaused(true);
+    setOpened(idx);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  };
+
+  const closeModal = () => {
+    setOpened(null);
+    setPaused(false);
+    resetAutoplay();
+  };
 
   const visible = getVisibleCertificates(center);
 
   return (
-    <section
-      id="certificates"
-      className="relative w-full py-8 md:py-12"
-      aria-label="Evallume Certifications"
-    >
+    <section id="certificates" className="relative w-full py-8 md:py-12" aria-label="Evallume Certifications">
       <div className="max-w-4xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary text-center mb-3 font-sans">
-          Certifications
-        </h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-primary text-center mb-3 font-sans">Certifications</h2>
         <p className="text-lg text-brandbrown text-center mb-8 max-w-2xl mx-auto font-sans">
           All Evallume devices are FDA certified and meet strict US safety and performance standards.
         </p>
+
         <div className="relative w-full flex flex-col items-center">
-          {/* Карусель сертификатов */}
-          <div className="relative flex items-center justify-center h-[330px] md:h-[400px] w-full max-w-2xl mx-auto select-none">
+          <div
+            className="relative flex items-center justify-center h-[330px] md:h-[400px] w-full max-w-2xl mx-auto select-none touch-auto"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             {visible.map((idx, i) => {
               const pos = i - Math.floor(visibleCount / 2);
               const isCenter = pos === 0;
-              const scale = isCenter ? 1 : 0.78;
-              const blur = isCenter ? "none" : "blur-sm";
-              const z = 10 - Math.abs(pos);
-              const shadow = isCenter ? "shadow-2xl" : "shadow";
-              const opacity = isCenter ? 1 : 0.7;
-              const rotate = pos * 8;
               return (
                 <motion.div
                   key={certificates[idx].src}
                   style={{
-                    zIndex: z,
-                    left: `${50 + pos * 24}%`,
-                    transform: `translateX(-50%) scale(${scale}) rotateY(${rotate}deg)`,
+                    zIndex: 10 - Math.abs(pos),
+                    left: `${50 + pos * 23}%`,
+                    transform: `translateX(-50%) scale(${isCenter ? 1 : 0.85}) rotateY(${pos * 6}deg)`,
                     position: "absolute",
-                    opacity,
-                    filter: blur,
-                    transition: "all 0.6s cubic-bezier(0.7,0,0.3,1)",
+                    opacity: isCenter ? 1 : 0.75,
+                    filter: isCenter ? "none" : "blur(2px)",
+                    cursor: isCenter ? "pointer" : "default",
+                    transition: "all 0.8s cubic-bezier(0.7,0,0.3,1)",
                   }}
-                  className={`duration-700 ${shadow} rounded-2xl bg-white/80`}
+                  className={`duration-1000 ${isCenter ? "shadow-2xl" : "shadow"} rounded-2xl bg-white/85 pointer-events-auto`}
                   animate={{}}
+                  onClick={isCenter ? () => openModal(idx) : undefined}
+                  tabIndex={isCenter ? 0 : -1}
+                  aria-label={`${certificates[idx].alt} enlarge`}
                 >
-                  <Image
-                    src={certificates[idx].src}
-                    alt={certificates[idx].alt}
-                    width={350}
-                    height={520}
-                    className="rounded-2xl object-contain"
-                    draggable={false}
-                  />
+                  <div className="flex items-center justify-center w-[250px] h-[350px] md:w-[300px] md:h-[420px]">
+                    <Image
+                      src={certificates[idx].src}
+                      alt={certificates[idx].alt}
+                      width={240}
+                      height={340}
+                      className="rounded-xl object-contain w-full h-full"
+                      draggable={false}
+                      style={{ background: "#fff", borderRadius: "1.2rem", boxShadow: isCenter ? "0 8px 36px #bfcbd866" : "0 2px 12px #bfcbd822" }}
+                    />
+                  </div>
                 </motion.div>
               );
             })}
           </div>
-          {/* Точки-переключатели */}
+
           <div className="flex gap-2 mt-6">
             {certificates.map((_, idx) => (
               <span
                 key={idx}
-                onClick={() => setCenter(idx)}
-                className={`h-2.5 w-2.5 rounded-full cursor-pointer transition-all duration-300 ${
-                  center === idx ? "bg-primary scale-125" : "bg-gray-400"
-                }`}
+                onClick={() => handleGoTo(idx)}
+                className={`h-2.5 w-2.5 rounded-full cursor-pointer transition-all duration-300 ${center === idx ? "bg-primary scale-125" : "bg-gray-400"}`}
                 aria-label="Evallume Certifications and FDA Compliance"
                 role="button"
                 tabIndex={0}
@@ -112,6 +151,25 @@ export default function CertificatesCarousel() {
           </div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {opened !== null && (
+          <motion.div className="fixed inset-0 bg-black/80 z-[1000] flex items-center justify-center pointer-events-auto" style={{ overflowY: "auto" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closeModal}>
+            <motion.div className="relative" initial={{ scale: 0.92, opacity: 0.96 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.92, opacity: 0.96 }} onClick={(e) => e.stopPropagation()}>
+              <Image
+                src={certificates[opened].src}
+                alt={certificates[opened].alt}
+                width={600}
+                height={900}
+                className="rounded-2xl max-h-[90vh] max-w-[90vw] object-contain bg-white"
+                draggable={false}
+                style={{ borderRadius: "1.5rem", background: "#fff", boxShadow: "0 8px 48px #bfcbd888" }}
+              />
+              <button className="absolute -top-6 right-0 text-white text-3xl font-bold bg-black/60 rounded-full px-3 py-1" onClick={closeModal} aria-label="Close">×</button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

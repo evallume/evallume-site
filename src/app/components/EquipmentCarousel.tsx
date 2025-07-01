@@ -244,20 +244,32 @@ export default function EquipmentBlock() {
   const [showFullDesc, setShowFullDesc] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const slidesCount = slides.length;
-  const touchStartX = useRef<number | null>(null);
+
+const swipeThreshold = 40;    // минимальная длина свайпа
+const angleTolerance = 1;   // максимально допустимый вертикальный угол
+const touchStart = useRef<{ x: number; y: number } | null>(null);
+
   
 
   const handleTouchStart = (e: React.TouchEvent) => {
-  touchStartX.current = e.touches[0].clientX;
+  touchStart.current = {
+    x: e.touches[0].clientX,
+    y: e.touches[0].clientY,
+  };
 };
 
-
 const handleTouchEnd = (e: React.TouchEvent) => {
-  if (touchStartX.current === null) return;
-  const diff = e.changedTouches[0].clientX - touchStartX.current;
-  if (diff > 50) prevSlide();
-  if (diff < -50) nextSlide();
-  touchStartX.current = null;
+  if (!touchStart.current) return;
+
+  const deltaX = e.changedTouches[0].clientX - touchStart.current.x;
+  const deltaY = e.changedTouches[0].clientY - touchStart.current.y;
+
+  if (Math.abs(deltaX) > swipeThreshold && Math.abs(deltaY) / Math.abs(deltaX) < angleTolerance) {
+    if (deltaX > 0) prevSlide();
+    else nextSlide();
+  }
+
+  touchStart.current = null;
 };
 
   // Stop auto-switching if full description is shown on mobile

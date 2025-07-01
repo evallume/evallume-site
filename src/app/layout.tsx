@@ -97,14 +97,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
 
         {/* Meta Pixel <noscript> для пользователей без JS */}
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1076066877735308&ev=PageView&noscript=1"
-          />
-        </noscript>
+<noscript>
+  {`<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1076066877735308&ev=PageView&noscript=1" alt="" />`}
+</noscript>
+
 
         <Analytics />
       </body>

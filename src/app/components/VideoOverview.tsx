@@ -3,7 +3,7 @@ const VideoOverview = () => (
     {/* Видео на десктопе */}
     <video
       className="hidden md:block absolute inset-0 w-full h-full object-cover rounded-3xl"
-      src="https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/Video/overview-desktop-xG74pAXyHuhQY71iEjXS60nZKRZsId.mp4"
+      src="https://klfmasfbi2f0kmeu.public.blob.vercel-storage.com/Video/view-desktop1-CGKlmMfaAOiakHuIFv9zqW8saWY5Zt.mp4"
       autoPlay
       loop
       muted
