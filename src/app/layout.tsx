@@ -63,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        {/* Google Analytics (gtag.js) */}
+        {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-RZRN267WK3"
           strategy="afterInteractive"
@@ -77,8 +77,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
 
-        {/* Meta (Facebook) Pixel */}
-        <Script id="facebook-pixel" strategy="afterInteractive">
+        {/* Первый Meta Pixel */}
+        <Script id="facebook-pixel-1" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -92,15 +92,33 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             fbq('track', 'PageView');
           `}
         </Script>
+        {/* Второй Meta Pixel */}
+        <Script id="facebook-pixel-2" strategy="afterInteractive">
+          {`
+            if(window.fbq) {
+              fbq('init', '1252239693224475');
+              fbq('track', 'PageView');
+            }
+          `}
+        </Script>
       </head>
       <body className="min-h-screen bg-gradient-to-br from-[#e6dad1] via-[#bfcbd8] to-[#e6dad1] text-black">
         {children}
 
-        {/* Meta Pixel <noscript> для пользователей без JS */}
-<noscript>
-  {`<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1076066877735308&ev=PageView&noscript=1" alt="" />`}
-</noscript>
-
+        {/* Первый Meta Pixel <noscript> */}
+        <noscript>
+          <img height="1" width="1" style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1076066877735308&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
+        {/* Второй Meta Pixel <noscript> */}
+        <noscript>
+          <img height="1" width="1" style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1252239693224475&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
 
         <Analytics />
       </body>
