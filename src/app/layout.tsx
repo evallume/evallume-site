@@ -4,7 +4,6 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 
 // --- SEO и OpenGraph мета-данные через generateMetadata ---
-
 export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL("https://evallume.com"),
@@ -34,13 +33,6 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: "en_US",
       type: "website",
     },
-    twitter: {
-      card: "summary_large_image",
-      title: "Evallume | Professional Aesthetic Equipment | USA",
-      description: "Discover Evallume's advanced aesthetic devices for beauty professionals in the USA.",
-      images: ["/img/og-image.jpg"],
-      creator: "@your_twitter",
-    },
     robots: "index, follow",
     icons: {
       icon: [
@@ -62,7 +54,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="font-sans">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+        {/* Canonical */}
+        <link rel="canonical" href="https://evallume.com/" />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-RZRN267WK3"
@@ -76,7 +69,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-RZRN267WK3');
           `}
         </Script>
-
         {/* Первый Meta Pixel */}
         <Script id="facebook-pixel-1" strategy="afterInteractive">
           {`
@@ -104,7 +96,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen bg-gradient-to-br from-[#e6dad1] via-[#bfcbd8] to-[#e6dad1] text-black">
         {children}
-
         {/* Первый Meta Pixel <noscript> */}
         <noscript>
           <img height="1" width="1" style={{ display: "none" }}
@@ -119,7 +110,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             alt=""
           />
         </noscript>
-
         <Analytics />
       </body>
     </html>
